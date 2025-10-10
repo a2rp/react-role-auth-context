@@ -1,5 +1,7 @@
 # React Role Auth Context
 
+![alt text](image.png)
+
 A front-end only **role-based authentication system** built with **React + Context API + React Router**, featuring
 persistent login, role hierarchy, and protected routes - all without a backend.
 
