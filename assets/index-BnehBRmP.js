@@ -1,4 +1,4 @@
-import{a as i,u as s,j as e,d as r}from"./index-B3jeX_mu.js";const a=r.div`
+import{a as i,u as s,j as e,d as r}from"./index-CFECH2Sz.js";const a=r.div`
   min-height: 70vh;
   display: flex;
   flex-direction: column;

@@ -1,4 +1,4 @@
-import{u as o,j as t,d as r}from"./index-B3jeX_mu.js";const a=r.div`
+import{u as o,j as t,d as r}from"./index-CFECH2Sz.js";const a=r.div`
   min-height: 70vh;
   display: flex;
   flex-direction: column;
