@@ -8,7 +8,7 @@ import { localdb } from "../store/localdb";
  * - import/export
  * - recent ids -> sessionStorage: ems:recent:<collection>
  * - cross-instance sync (BroadcastChannel + CustomEvent + storage)
- * - ✅ PERSIST-ON-MUTATE: writes to LS immediately before navigation
+ * - âœ… PERSIST-ON-MUTATE: writes to LS immediately before navigation
  */
 export default function useLocalCollection(collection, options = {}) {
     const {
@@ -57,7 +57,7 @@ export default function useLocalCollection(collection, options = {}) {
                     detail: { collection, sourceId: instanceId.current },
                 })
             );
-        } catch {}
+        } catch { /* browser event unavailable */ }
         // cross-tab
         try {
             if (!bcRef.current && "BroadcastChannel" in window) {
@@ -68,7 +68,7 @@ export default function useLocalCollection(collection, options = {}) {
                 collection,
                 sourceId: instanceId.current,
             });
-        } catch {}
+        } catch { /* browser event unavailable */ }
     }, [collection]);
 
     // listen: custom event + BroadcastChannel + storage
@@ -99,7 +99,7 @@ export default function useLocalCollection(collection, options = {}) {
                     refresh();
                 };
             }
-        } catch {}
+        } catch { /* browser event unavailable */ }
 
         const onStorage = (e) => {
             if (e.key === `ems:v1:${collection}`) refresh();
@@ -111,7 +111,7 @@ export default function useLocalCollection(collection, options = {}) {
             window.removeEventListener("storage", onStorage);
             try {
                 bc && bc.close();
-            } catch {}
+            } catch { /* browser event unavailable */ }
         };
     }, [collection, refresh]);
 
@@ -130,7 +130,7 @@ export default function useLocalCollection(collection, options = {}) {
                 }
                 const next = [id, ...arr.filter((x) => x !== id)].slice(0, 10);
                 sessionStorage.setItem(key, JSON.stringify(next));
-            } catch {}
+            } catch { /* browser event unavailable */ }
         },
         [collection]
     );

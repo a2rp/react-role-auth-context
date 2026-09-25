@@ -8,9 +8,7 @@ const border = "var(--border)";
 const radius = "var(--radius)";
 const shadow = "var(--shadow)";
 const accent = "var(--accent)";
-const accentSoft = "var(--accent-soft, rgba(90,169,255,0.15))";
 const danger = "var(--danger)";
-const warning = "var(--warning)";
 
 export const Styled = {
     Page: styled.div`

@@ -72,8 +72,8 @@ export default function DepartmentDetail() {
         return (
             <Styled.Page>
                 <Styled.Breadcrumbs>
-                    <NavLink to="/home">Home</NavLink><span>›</span>
-                    <NavLink to="/departments">Departments</NavLink><span>›</span>
+                    <NavLink to="/home">Home</NavLink><span>â€º</span>
+                    <NavLink to="/departments">Departments</NavLink><span>â€º</span>
                     <span className="current">Not found</span>
                 </Styled.Breadcrumbs>
 
@@ -100,8 +100,8 @@ export default function DepartmentDetail() {
     return (
         <Styled.Page>
             <Styled.Breadcrumbs aria-label="Breadcrumbs">
-                <NavLink to="/home">Home</NavLink><span>›</span>
-                <NavLink to="/departments">Departments</NavLink><span>›</span>
+                <NavLink to="/home">Home</NavLink><span>â€º</span>
+                <NavLink to="/departments">Departments</NavLink><span>â€º</span>
                 <span className="current">{dep.name || "Untitled"}</span>
             </Styled.Breadcrumbs>
 
@@ -157,13 +157,13 @@ export default function DepartmentDetail() {
                 </div>
                 <div className="span2">
                     <div className="label">Notes</div>
-                    <div className="value">{dep.notes || <span className="muted">—</span>}</div>
+                    <div className="value">{dep.notes || <span className="muted">â€”</span>}</div>
                 </div>
             </Styled.MetaCard>
 
             <Styled.SectionCard>
                 <div className="sectionHeader">
-                    <h4>Employees in “{dep.name || "-"}”</h4>
+                    <h4>Employees in â€œ{dep.name || "-"}â€</h4>
                     <div className="actions">
                         <NavLink to="/employees" className="btn">Open Employees</NavLink>
                     </div>

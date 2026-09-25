@@ -59,39 +59,19 @@ export default function RoleDetail() {
     // pick role and mark recent
     const role = useMemo(() => roles.get(id), [id, roles]);
 
-    // if role doesn't exist, simple empty state
-    if (!role) {
-        return (
-            <Styled.Page>
-                <Styled.Breadcrumbs>
-                    <NavLink to="/home">Home</NavLink> <span>›</span>
-                    <NavLink to="/roles">Roles</NavLink> <span>›</span>
-                    <span className="current">Not found</span>
-                </Styled.Breadcrumbs>
-
-                <Styled.NoticeCard>
-                    <h3>Role not found</h3>
-                    <p className="muted">The requested role does not exist or was removed.</p>
-                    <div className="actions">
-                        <NavLink to="/roles" className="btn">Back to roles</NavLink>
-                    </div>
-                </Styled.NoticeCard>
-            </Styled.Page>
-        );
-    }
-
     const [confirm, setConfirm] = useState({ open: false, mode: "delete" });
 
     const assignments = useMemo(() => {
+        if (!role) return { count: 0, list: [] };
         const name = (role.name || "").toLowerCase();
         const list = employees.items.filter(
             (e) => !e.isDeleted && (e.role || "").toLowerCase() === name
         );
-        return { count: list.length, list: list.slice(0, 6) }; // show top 6
-    }, [employees.items, role.name]);
+        return { count: list.length, list: list.slice(0, 6) };
+    }, [employees.items, role]);
 
-    // dynamic permissions support: array or comma string
     const permissions = useMemo(() => {
+        if (!role) return [];
         const arr = Array.isArray(role.permissions)
             ? role.permissions
             : typeof role.permissions === "string"
@@ -102,25 +82,31 @@ export default function RoleDetail() {
                         ? role.scopes.split(",")
                         : [];
         return arr.map((s) => s.trim()).filter(Boolean);
-    }, [role.permissions, role.scopes]);
+    }, [role]);
 
     const deleteRole = () => {
+        if (!role) return;
         roles.remove(role.id);
         setConfirm({ open: false, mode: "delete" });
     };
+
     const restoreRole = () => {
+        if (!role) return;
         roles.restore(role.id);
         setConfirm({ open: false, mode: "delete" });
     };
 
-    // ensure recent mark if user deep-linked and didn't trigger roles.get earlier
-    useEffect(() => { roles.markRecent(role.id); }, [roles, role.id]);
+    useEffect(() => {
+        if (role) roles.markRecent(role.id);
+    }, [roles, role]);
+
+    // if role doesn't exist, simple empty state
 
     return (
         <Styled.Page>
             <Styled.Breadcrumbs>
-                <NavLink to="/home">Home</NavLink> <span>›</span>
-                <NavLink to="/roles">Roles</NavLink> <span>›</span>
+                <NavLink to="/home">Home</NavLink> <span>â€º</span>
+                <NavLink to="/roles">Roles</NavLink> <span>â€º</span>
                 <span className="current">{role.name || "Untitled Role"}</span>
             </Styled.Breadcrumbs>
 
@@ -214,7 +200,7 @@ export default function RoleDetail() {
                             </li>
                         ))}
                         {assignments.count > assignments.list.length && (
-                            <li className="muted">…and {assignments.count - assignments.list.length} more</li>
+                            <li className="muted">â€¦and {assignments.count - assignments.list.length} more</li>
                         )}
                     </ul>
                 )}

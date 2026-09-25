@@ -66,16 +66,16 @@ export default function EmployeeDetail() {
             <Styled.Page>
                 <Styled.Breadcrumbs aria-label="Breadcrumbs">
                     <NavLink to="/home">Home</NavLink>
-                    <span>›</span>
+                    <span>Ã¢â‚¬Âº</span>
                     <NavLink to="/employees">Employees</NavLink>
-                    <span>›</span>
+                    <span>Ã¢â‚¬Âº</span>
                     <span className="current">Not found</span>
                 </Styled.Breadcrumbs>
 
                 <Styled.MissingCard>
                     <h3>Employee not found</h3>
                     <p className="muted">
-                        This record doesn’t exist or was removed. Go back to the list or create a new one.
+                        This record doesnÃ¢â‚¬â„¢t exist or was removed. Go back to the list or create a new one.
                     </p>
                     <div className="actions">
                         <NavLink to="/employees" className="btn">Back to list</NavLink>
@@ -100,16 +100,16 @@ export default function EmployeeDetail() {
     };
 
     const copyId = async () => {
-        try { await navigator.clipboard.writeText(emp.id); } catch { }
+        try { await navigator.clipboard.writeText(emp.id); } catch { /* clipboard unavailable */ }
     };
 
     return (
         <Styled.Page>
             <Styled.Breadcrumbs aria-label="Breadcrumbs">
                 <NavLink to="/home">Home</NavLink>
-                <span>›</span>
+                <span>Ã¢â‚¬Âº</span>
                 <NavLink to="/employees">Employees</NavLink>
-                <span>›</span>
+                <span>Ã¢â‚¬Âº</span>
                 <span className="current">{emp.name || "Employee"}</span>
             </Styled.Breadcrumbs>
 
@@ -178,7 +178,7 @@ export default function EmployeeDetail() {
 
                     <div>
                         <div className="label">Salary</div>
-                        <div className="value">{emp.salary != null && emp.salary !== "" ? `₹ ${emp.salary}` : "-"}</div>
+                        <div className="value">{emp.salary != null && emp.salary !== "" ? `Ã¢â€šÂ¹ ${emp.salary}` : "-"}</div>
                     </div>
 
                     <div className="span2">

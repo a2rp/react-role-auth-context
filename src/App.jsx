@@ -1,101 +1,105 @@
-import ScrollToTop from './components/ScrollToTop';
-import Styled from './App.styled';
-import { Route, Routes, NavLink } from 'react-router-dom';
-import { lazy, Suspense, useEffect, useRef, useState } from 'react';
-import { MdArrowUpward, MdMenuOpen } from 'react-icons/md';
-import { TbSunMoon } from 'react-icons/tb';
-import { FaRegUser } from 'react-icons/fa';
-import { Box, CircularProgress } from '@mui/material';
-import Footer from './components/footer';
-import NavList from './components/navList';
-import AppRoutes from './routes/AppRoutes';
+import ScrollToTop from "./components/ScrollToTop";
+import Styled from "./App.styled";
+import { NavLink, useLocation } from "react-router-dom";
+import { Suspense, useEffect, useRef, useState } from "react";
+import { MdArrowUpward, MdMenuOpen } from "react-icons/md";
+import { TbSunMoon } from "react-icons/tb";
+import { FaRegUser } from "react-icons/fa";
+import { Box, CircularProgress } from "@mui/material";
+import Footer from "./components/footer";
+import NavList from "./components/navList";
+import AppRoutes from "./routes/AppRoutes";
 import Breadcrumbs from "./components/Breadcrumbs";
-import { useAuth } from "./context/AuthContext"; // ✅ new import
+import { useAuth } from "./context/AuthContext";
 
-// --- Theme handling ---
-const THEME_KEY = 'theme';
+const THEME_KEY = "theme";
 const getInitialTheme = () => {
     try {
         const saved = localStorage.getItem(THEME_KEY);
-        if (saved === 'light' || saved === 'dark') return saved;
-    } catch { }
-    if (typeof window !== 'undefined' && window.matchMedia) {
-        return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        if (saved === "light" || saved === "dark") return saved;
+    } catch {
+        return "dark";
     }
-    return 'dark';
+    if (typeof window !== "undefined" && window.matchMedia) {
+        return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+    }
+    return "dark";
 };
 
 const App = () => {
-    const { user, logout } = useAuth(); // ✅ access context
+    const { user, logout } = useAuth();
+    const { pathname } = useLocation();
     const [displayNav, setDisplayNav] = useState(true);
-    const handleDisplayNav = () => setDisplayNav(prev => !prev);
-
-    // ↑ Scroll-to-top state + ref
     const contentRef = useRef(null);
     const [showScrollTop, setShowScrollTop] = useState(false);
-
     const [theme, setTheme] = useState(getInitialTheme);
 
     useEffect(() => {
-        const el = contentRef.current;
-        if (!el) return;
-        const onScroll = () => setShowScrollTop(el.scrollTop > 100);
+        const element = contentRef.current;
+        if (!element) return undefined;
+        const onScroll = () => setShowScrollTop(element.scrollTop > 100);
         onScroll();
-        el.addEventListener('scroll', onScroll);
-        return () => el.removeEventListener('scroll', onScroll);
+        element.addEventListener("scroll", onScroll);
+        return () => element.removeEventListener("scroll", onScroll);
     }, []);
 
     useEffect(() => {
-        const root = document.documentElement;
-        root.setAttribute('data-theme', theme);
-        try { localStorage.setItem(THEME_KEY, theme); } catch { }
+        document.documentElement.setAttribute("data-theme", theme);
+        try {
+            localStorage.setItem(THEME_KEY, theme);
+        } catch {
+            return undefined;
+        }
+        return undefined;
     }, [theme]);
 
-    const toggleTheme = () => setTheme(t => (t === 'light' ? 'dark' : 'light'));
-    const scrollToTop = () => contentRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
+    const scrollToTop = () => contentRef.current?.scrollTo({ top: 0, behavior: "smooth" });
 
     return (
         <Styled.Wrapper>
             <Styled.Header>
-                <Styled.LogoLinkWrapper>
-                    <Styled.NavLinkWrapper onClick={handleDisplayNav} title="Toggle Navigation">
+                <Styled.LogoLinkWrapper className="role-auth-header">
+                    <Styled.NavLinkWrapper
+                        as="button"
+                        type="button"
+                        onClick={() => setDisplayNav((previous) => !previous)}
+                        title="Toggle Navigation"
+                        aria-label="Toggle navigation"
+                        aria-expanded={displayNav}
+                    >
                         <MdMenuOpen size={20} />
                     </Styled.NavLinkWrapper>
-                    <NavLink to="/" title="React Role Auth Context">React Role Auth Context</NavLink>
+                    <NavLink to="/" title="React Role Auth Context">
+                        <img src={import.meta.env.BASE_URL + "logo.png"} alt="Ashish Ranjan logo" />
+                        <span>React Role Auth Context</span>
+                    </NavLink>
                 </Styled.LogoLinkWrapper>
 
                 <Styled.Heading>
-                    {/* theme toggle */}
                     <div
                         className="themeToggle"
-                        title={`Switch to ${theme === 'light' ? 'Dark' : 'Light'} theme`}
+                        title={"Switch to " + (theme === "light" ? "Dark" : "Light") + " theme"}
                         role="button"
-                        aria-pressed={theme === 'light' ? 'true' : 'false'}
-                        onClick={toggleTheme}
+                        tabIndex={0}
+                        aria-pressed={theme === "light"}
+                        onClick={() => setTheme((current) => (current === "light" ? "dark" : "light"))}
+                        onKeyDown={(event) => {
+                            if (event.key === "Enter" || event.key === " ") {
+                                event.preventDefault();
+                                setTheme((current) => (current === "light" ? "dark" : "light"));
+                            }
+                        }}
                     >
                         <TbSunMoon />
                     </div>
 
-                    {/* ✅ show user info if logged in */}
                     {user?.isLoggedIn && (
-                        <div className="userBox" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <div className="userBox">
                             <FaRegUser size={16} />
-                            <span style={{ fontSize: '14px' }}>
-                                {user.name} <em style={{ opacity: 0.7 }}>({user.role})</em>
+                            <span>
+                                {user.name} <em>({user.role})</em>
                             </span>
-                            <button
-                                onClick={logout}
-                                style={{
-                                    background: 'var(--accent, #22c55e)',
-                                    border: 'none',
-                                    borderRadius: '6px',
-                                    padding: '4px 10px',
-                                    fontSize: '13px',
-                                    fontWeight: '600',
-                                    cursor: 'pointer',
-                                    color: '#0b0b0b'
-                                }}
-                            >
+                            <button type="button" onClick={logout}>
                                 Logout
                             </button>
                         </div>
@@ -114,11 +118,9 @@ const App = () => {
                     <Styled.RoutesWrapper>
                         <Breadcrumbs />
                         <Suspense
+                            key={pathname}
                             fallback={
-                                <Box sx={{
-                                    width: '100%', height: '200px',
-                                    display: 'flex', alignItems: 'center', justifyContent: 'center'
-                                }}>
+                                <Box sx={{ width: "100%", height: "200px", display: "flex", alignItems: "center", justifyContent: "center" }}>
                                     <CircularProgress />
                                 </Box>
                             }

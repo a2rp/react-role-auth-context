@@ -9,13 +9,13 @@ const About = () => {
                 <strong>React Role Auth Context</strong> is built to show how cleanly authentication and authorization can be handled on the frontend without external libraries or servers.
             </p>
             <p>
-                The app uses three custom route wrappers — <code>PublicRoute</code>, <code>PrivateRoute</code>, and <code>RoleRoute</code> — to manage user access dynamically based on role hierarchy:
+                The app uses three custom route wrappers â€” <code>PublicRoute</code>, <code>PrivateRoute</code>, and <code>RoleRoute</code> â€” to manage user access dynamically based on role hierarchy:
             </p>
 
             <ul>
-                <li><b>Root</b> → can access Root, Admin, and Employee areas</li>
-                <li><b>Admin</b> → can access Admin and Employee areas</li>
-                <li><b>Employee</b> → can access Employee area only</li>
+                <li><b>Root</b> â†’ can access Root, Admin, and Employee areas</li>
+                <li><b>Admin</b> â†’ can access Admin and Employee areas</li>
+                <li><b>Employee</b> â†’ can access Employee area only</li>
             </ul>
 
             <p>

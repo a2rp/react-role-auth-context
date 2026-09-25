@@ -102,8 +102,6 @@ export default function Shifts() {
         setDraft({ name: "", code: "", startTime: "09:00", endTime: "18:00", color: "#2f74ff", isActive: true, notes: "" });
     };
 
-    const requestDelete = (id) => setConfirm({ open: true, id, mode: "delete" });
-    const requestRestore = (id) => setConfirm({ open: true, id, mode: "restore" });
     const performConfirm = () => {
         const { id, mode } = confirm;
         if (!id) return setConfirm({ open: false, id: null, mode: "delete" });
@@ -139,7 +137,7 @@ export default function Shifts() {
         return (
             <span aria-hidden
                 style={{ display: "inline-block", marginLeft: 6, opacity: active ? 1 : 0.3, transform: active && dir === "desc" ? "rotate(180deg)" : "none", transition: "transform .2s var(--easing), opacity .2s var(--easing)" }}>
-                ▲
+                â–²
             </span>
         );
     };

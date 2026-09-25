@@ -104,9 +104,9 @@ export default function ShiftsNew() {
         <Styled.Page>
             <Styled.Breadcrumbs aria-label="Breadcrumbs">
                 <NavLink to="/home">Home</NavLink>
-                <span>›</span>
+                <span>â€º</span>
                 <NavLink to="/shifts">Shifts</NavLink>
-                <span>›</span>
+                <span>â€º</span>
                 <span className="current">New</span>
             </Styled.Breadcrumbs>
 
@@ -217,7 +217,7 @@ export default function ShiftsNew() {
                     <div>
                         <div className="label">Schedule</div>
                         <div className="value">
-                            {draft.days.length ? draft.days.join(", ") : "—"} · {draft.start}–{draft.end} · Break {draft.breakMins}m
+                            {draft.days.length ? draft.days.join(", ") : "â€”"} Â· {draft.start}â€“{draft.end} Â· Break {draft.breakMins}m
                         </div>
                     </div>
                     <div>
@@ -240,7 +240,7 @@ export default function ShiftsNew() {
                     </div>
                     <div>
                         <div className="label">Will appear in</div>
-                        <div className="value">Shifts → List (sorted by Updated)</div>
+                        <div className="value">Shifts â†’ List (sorted by Updated)</div>
                     </div>
                 </div>
             </Styled.HintCard>

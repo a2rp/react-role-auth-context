@@ -1,7 +1,6 @@
 import styled, { css } from "styled-components";
 
 /* tokens from CSS variables with safe fallbacks */
-const bg = "var(--bg, #0d1117)";
 const text = "var(--text, #f3f4f6)";
 const muted = "var(--muted, #a0a0a7)";
 const card = "var(--card, #111318)";
@@ -116,12 +115,12 @@ export const Styled = {
                 position: relative;
             }
             .chev::before {
-                content: "▾"; /* expanded */
+                content: "â–¾"; /* expanded */
                 display: inline-block;
                 transition: transform 0.2s ease;
             }
             &[data-collapsed="true"] .chev::before {
-                content: "▸"; /* collapsed (right arrow) */
+                content: "â–¸"; /* collapsed (right arrow) */
             }
         }
 

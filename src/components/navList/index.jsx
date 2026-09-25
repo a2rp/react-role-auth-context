@@ -10,30 +10,6 @@ const NS_RECENT = "ems:recent";
 const NS_DATA = "ems:v1";
 
 /* recent id logic (unchanged) */
-function pickRecentId(kind) {
-    try {
-        const s = sessionStorage.getItem(`${NS_RECENT}:${kind}`);
-        if (s) {
-            const v = JSON.parse(s);
-            if (typeof v === "string") return v;
-            if (Array.isArray(v))
-                return (typeof v[0] === "string" ? v[0] : v[0]?.id) || null;
-            if (v && typeof v === "object") return v.id || null;
-        }
-    } catch { }
-    try {
-        const raw = localStorage.getItem(`${NS_DATA}:${kind}`);
-        if (raw) {
-            const arr = JSON.parse(raw);
-            if (Array.isArray(arr) && arr.length) {
-                const item = arr.find((x) => !x?.isDeleted) || arr[0];
-                return item?.id || null;
-            }
-        }
-    } catch { }
-    return null;
-}
-
 const NavListCore = () => {
     const navRef = useRef(null);
     const wrapperRef = useRef(null);
@@ -55,28 +31,6 @@ const NavListCore = () => {
             return {};
         }
     });
-
-    /* rebuild ids just to preserve your structure */
-    const [ids, setIds] = useState({
-        emp: null,
-        dep: null,
-        role: null,
-        shift: null,
-        leave: null,
-        pay: null,
-        doc: null,
-    });
-    useEffect(() => {
-        setIds({
-            emp: pickRecentId("employees"),
-            dep: pickRecentId("departments"),
-            role: pickRecentId("roles"),
-            shift: pickRecentId("shifts"),
-            leave: pickRecentId("leaves"),
-            pay: pickRecentId("payroll"),
-            doc: pickRecentId("documents"),
-        });
-    }, [pathname]);
 
     /* keep active link centered */
     useEffect(() => {
@@ -121,7 +75,7 @@ const NavListCore = () => {
     useEffect(() => {
         try {
             sessionStorage.setItem(COLLAPSE_KEY, JSON.stringify(collapsed));
-        } catch { }
+        } catch { /* storage unavailable */ }
         applyAllCollapsed();
     }, [collapsed, applyAllCollapsed]);
 
@@ -129,7 +83,7 @@ const NavListCore = () => {
     useEffect(() => {
         try {
             sessionStorage.setItem(STORAGE_KEY, search);
-        } catch { }
+        } catch { /* storage unavailable */ }
         const root = wrapperRef.current;
         if (!root) return;
         const q = search.trim().toLowerCase();

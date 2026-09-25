@@ -120,7 +120,7 @@ export const localdb = {
         ks.forEach((k) => {
             try {
                 localStorage.removeItem(k);
-            } catch {}
+            } catch { /* storage item unavailable */ }
         });
         // keep META so version stays recorded
         ensureMeta();

@@ -36,7 +36,7 @@ const RootDashboard = () => {
     return (
         <Page>
             <h2>Root Dashboard</h2>
-            <p>Welcome, <b>{user.name}</b> — you have full system control.</p>
+            <p>Welcome, <b>{user.name}</b> â€” you have full system control.</p>
             <button onClick={logout}>Logout</button>
         </Page>
     );
