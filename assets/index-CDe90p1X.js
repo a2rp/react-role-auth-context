@@ -1,4 +1,4 @@
-import{u as n,j as e,d as r}from"./index-CFECH2Sz.js";const s=r.div`
+import{u as o,j as t,d as r}from"./index-8898QGhj.js";const a=r.div`
   min-height: 70vh;
   display: flex;
   flex-direction: column;
@@ -20,4 +20,4 @@ import{u as n,j as e,d as r}from"./index-CFECH2Sz.js";const s=r.div`
     transition: 0.2s;
     &:hover { opacity: 0.85; transform: translateY(-2px); }
   }
-`,i=()=>{const{user:t,logout:o}=n();return e.jsxs(s,{children:[e.jsx("h2",{children:"Employee Dashboard"}),e.jsxs("p",{children:["Welcome, ",e.jsx("b",{children:t.name}),". You can view and update your assigned tasks."]}),e.jsx("button",{onClick:o,children:"Logout"})]})};export{i as default};
+`,i=()=>{const{user:e,logout:n}=o();return t.jsxs(a,{children:[t.jsx("h2",{children:"Admin Dashboard"}),t.jsxs("p",{children:["Hello, ",t.jsx("b",{children:e.name}),". You can manage employees and system data."]}),t.jsx("button",{onClick:n,children:"Logout"})]})};export{i as default};

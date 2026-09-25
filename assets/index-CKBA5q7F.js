@@ -1,4 +1,4 @@
-import{d as r,j as e}from"./index-CFECH2Sz.js";const n="var(--card, #111)",o="var(--text, #e9e9e9)",a="var(--muted, #b7b7b7)",s="var(--border, #222)",i="var(--radius, 16px)",d="var(--shadow, 0 8px 24px rgba(0,0,0,0.35))",t="var(--accent, #22c55e)",c={Page:r.div`
+import{d as r,j as e}from"./index-8898QGhj.js";const n="var(--card, #111)",o="var(--text, #e9e9e9)",a="var(--muted, #b7b7b7)",s="var(--border, #222)",i="var(--radius, 16px)",d="var(--shadow, 0 8px 24px rgba(0,0,0,0.35))",t="var(--accent, #22c55e)",c={Page:r.div`
         width: 100%;
         max-width: 900px;
         margin: 0 auto;
@@ -67,4 +67,4 @@ import{d as r,j as e}from"./index-CFECH2Sz.js";const n="var(--card, #111)",o="va
                 font-size: 1.5rem;
             }
         }
-    `},x=()=>e.jsxs(c.Page,{children:[e.jsx("h2",{children:"Welcome to React Role Auth Context"}),e.jsxs("p",{children:["This project demonstrates a ",e.jsx("strong",{children:"frontend-only"})," role-based authentication system using React, Context API, and React Router."]}),e.jsxs("p",{children:["You can explore the app as different roles — ",e.jsx("b",{children:"Root"}),", ",e.jsx("b",{children:"Admin"}),", or ",e.jsx("b",{children:"Employee"})," — and experience how navigation, route protection, and access permissions change automatically."]}),e.jsxs("p",{children:["The system runs entirely in the browser using ",e.jsx("code",{children:"localStorage"}),", making it perfect for demos, prototypes, or portfolio projects."]})]});export{x as default};
+    `},x=()=>e.jsxs(c.Page,{children:[e.jsx("h2",{children:"Welcome to React Role Auth Context"}),e.jsxs("p",{children:["This project demonstrates a ",e.jsx("strong",{children:"frontend-only"})," role-based authentication system using React, Context API, and React Router."]}),e.jsxs("p",{children:["You can explore the app as different roles â€” ",e.jsx("b",{children:"Root"}),", ",e.jsx("b",{children:"Admin"}),", or ",e.jsx("b",{children:"Employee"})," â€” and experience how navigation, route protection, and access permissions change automatically."]}),e.jsxs("p",{children:["The system runs entirely in the browser using ",e.jsx("code",{children:"localStorage"}),", making it perfect for demos, prototypes, or portfolio projects."]})]});export{x as default};

@@ -1,4 +1,4 @@
-import{u as o,j as t,d as r}from"./index-CFECH2Sz.js";const a=r.div`
+import{u as r,j as t,d as n}from"./index-8898QGhj.js";const s=n.div`
   min-height: 70vh;
   display: flex;
   flex-direction: column;
@@ -7,7 +7,11 @@ import{u as o,j as t,d as r}from"./index-CFECH2Sz.js";const a=r.div`
   text-align: center;
   color: var(--text, #e9e9e9);
 
-  h2 { font-weight: 800; margin-bottom: 10px; }
+  h2 {
+    font-weight: 800;
+    margin-bottom: 10px;
+  }
+
   button {
     margin-top: 20px;
     padding: 10px 16px;
@@ -20,4 +24,4 @@ import{u as o,j as t,d as r}from"./index-CFECH2Sz.js";const a=r.div`
     transition: 0.2s;
     &:hover { opacity: 0.85; transform: translateY(-2px); }
   }
-`,i=()=>{const{user:e,logout:n}=o();return t.jsxs(a,{children:[t.jsx("h2",{children:"Admin Dashboard"}),t.jsxs("p",{children:["Hello, ",t.jsx("b",{children:e.name}),". You can manage employees and system data."]}),t.jsx("button",{onClick:n,children:"Logout"})]})};export{i as default};
+`,i=()=>{const{user:o,logout:e}=r();return t.jsxs(s,{children:[t.jsx("h2",{children:"Root Dashboard"}),t.jsxs("p",{children:["Welcome, ",t.jsx("b",{children:o.name})," â€” you have full system control."]}),t.jsx("button",{onClick:e,children:"Logout"})]})};export{i as default};
