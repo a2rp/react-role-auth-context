@@ -1,6 +1,8 @@
 # React Role Auth Context
 
-A frontend React application that demonstrates role-based authentication, protected routes, persistent login state, and responsive navigation without a backend.
+A frontend React application that demonstrates simulated sign-in, role-aware routes, persistent demo state, and responsive navigation without a backend.
+
+> **Demo limitation:** Sign-in is simulated and stored in browser `localStorage`. Users can change that data, so client-side route guards are not real authentication or a security boundary. Production apps must verify identity and permissions on a trusted server.
 
 ![React Role Auth Context preview](screenshot.png)
 
@@ -20,18 +22,18 @@ React, Vite, React Router, Context API, Material UI, styled-components, and Reac
 
 ## Run locally
 
-``bash
+```bash
 npm install
 npm run dev
-``
+```
 
 ## Build and deploy
 
-``bash
+```bash
 npm run lint
 npm run build
 npm run deploy
-``
+```
 
 Live demo: [a2rp.github.io/react-role-auth-context](https://a2rp.github.io/react-role-auth-context/)
 

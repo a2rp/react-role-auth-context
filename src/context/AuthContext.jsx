@@ -1,48 +1,64 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 
-// Default user structure
+const AUTH_KEY = "authUser";
+const VALID_ROLES = new Set(["root", "admin", "employee"]);
+
 const defaultUser = {
     name: null,
-    role: null, // "root" | "admin" | "employee" | null
+    role: null,
     isLoggedIn: false,
 };
 
-// Create context
 const AuthContext = createContext({
     user: defaultUser,
     login: () => { },
     logout: () => { },
 });
 
-// Provider component
-export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(() => {
-        try {
-            const saved = localStorage.getItem("authUser");
-            return saved ? JSON.parse(saved) : defaultUser;
-        } catch {
+function readSavedUser() {
+    if (typeof window === "undefined") return defaultUser;
+
+    try {
+        const saved = JSON.parse(window.localStorage.getItem(AUTH_KEY) || "null");
+        if (
+            !saved ||
+            saved.isLoggedIn !== true ||
+            !VALID_ROLES.has(saved.role) ||
+            typeof saved.name !== "string" ||
+            !saved.name.trim()
+        ) {
             return defaultUser;
         }
-    });
 
-    // Persist to localStorage on change
+        return { name: saved.name.trim(), role: saved.role, isLoggedIn: true };
+    } catch {
+        return defaultUser;
+    }
+}
+
+export const AuthProvider = ({ children }) => {
+    const [user, setUser] = useState(readSavedUser);
+
     useEffect(() => {
-        localStorage.setItem("authUser", JSON.stringify(user));
+        try {
+            window.localStorage.setItem(AUTH_KEY, JSON.stringify(user));
+        } catch {
+            // Storage can be unavailable in private browsing or restricted contexts.
+        }
     }, [user]);
 
-    // Simulated login (for now)
     const login = (role, name = "Guest User") => {
+        if (!VALID_ROLES.has(role)) return;
+
         setUser({
-            name,
-            role, // "root", "admin", or "employee"
+            name: typeof name === "string" && name.trim() ? name.trim() : "Guest User",
+            role,
             isLoggedIn: true,
         });
     };
 
-    // Logout and clear storage
     const logout = () => {
         setUser(defaultUser);
-        localStorage.removeItem("authUser");
     };
 
     return (
@@ -52,5 +68,4 @@ export const AuthProvider = ({ children }) => {
     );
 };
 
-// Custom hook
 export const useAuth = () => useContext(AuthContext);

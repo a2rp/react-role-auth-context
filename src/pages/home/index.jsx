@@ -1,21 +1,19 @@
 import React from "react";
 import { Styled } from "./styled";
 
-const Home = () => {
-    return (
-        <Styled.Page>
-            <h2>Welcome to React Role Auth Context</h2>
-            <p>
-                This project demonstrates a <strong>frontend-only</strong> role-based authentication system using React, Context API, and React Router.
-            </p>
-            <p>
-                You can explore the app as different roles â€” <b>Root</b>, <b>Admin</b>, or <b>Employee</b> â€” and experience how navigation, route protection, and access permissions change automatically.
-            </p>
-            <p>
-                The system runs entirely in the browser using <code>localStorage</code>, making it perfect for demos, prototypes, or portfolio projects.
-            </p>
-        </Styled.Page>
-    );
-};
+const Home = () => (
+    <Styled.Page>
+        <h2>Welcome to React Role Auth Context</h2>
+        <p>
+            Explore simulated sign-in and role-aware routes using React Context and React Router.
+        </p>
+        <p>
+            Choose Root, Admin, or Employee on the login page to see how navigation and client-side route rules change with each role.
+        </p>
+        <p>
+            This demo stores its sign-in state in <code>localStorage</code>. It is not real authentication or a security boundary; production apps must enforce permissions on a trusted server.
+        </p>
+    </Styled.Page>
+);
 
 export default Home;

@@ -24,7 +24,7 @@
                          "react":  "^18.2.0",
                          "react-dom":  "^18.2.0",
                          "react-icons":  "^5.5.0",
-                         "react-router-dom":  "^6.30.1",
+                         "react-router-dom":  "^7.18.5",
                          "react-toastify":  "^11.0.5",
                          "react-window":  "^2.1.0",
                          "recharts":  "^3.2.1",
@@ -44,6 +44,6 @@
                             "rollup-plugin-obfuscator":  "^1.1.0",
                             "vite":  "^6.3.5"
                         },
-    "description":  "Frontend role-based authentication and authorization demo",
+    "description":  "Frontend demo of simulated sign-in and role-aware routes with React Context and React Router",
     "homepage":  "https://a2rp.github.io/react-role-auth-context/"
 }
