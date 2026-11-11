@@ -54,10 +54,17 @@ export default function RoleEdit() {
     });
 
     // pick role record
-    const item = useMemo(() => roles.get(id), [roles, id]);
+    const getRole = roles.get;
+    const item = useMemo(() => getRole(id), [getRole, id]);
 
     // not found
     const notFound = !item;
+    const itemExists = Boolean(item);
+    const itemName = item?.name;
+    const itemCode = item?.code;
+    const itemDescription = item?.description;
+    const itemBaseSalary = item?.baseSalary;
+    const itemIsDisabled = item?.isDisabled;
 
     const [draft, setDraft] = useState(() => ({
         name: item?.name || "",
@@ -71,15 +78,15 @@ export default function RoleEdit() {
 
     // keep in sync if param changes or data refreshes
     useEffect(() => {
-        if (!item) return;
+        if (!itemExists) return;
         setDraft({
-            name: item.name || "",
-            code: item.code || "",
-            description: item.description || "",
-            baseSalary: item.baseSalary ?? "",
-            isDisabled: !!item.isDisabled,
+            name: itemName || "",
+            code: itemCode || "",
+            description: itemDescription || "",
+            baseSalary: itemBaseSalary ?? "",
+            isDisabled: !!itemIsDisabled,
         });
-    }, [id, item?.name, item?.code, item?.description, item?.baseSalary, item?.isDisabled]);
+    }, [id, itemExists, itemName, itemCode, itemDescription, itemBaseSalary, itemIsDisabled]);
 
     // mark recent for quick-nav
     useEffect(() => { if (id) roles.markRecent(id); }, [id]); // eslint-disable-line

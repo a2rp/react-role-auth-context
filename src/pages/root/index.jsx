@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../../context/useAuth";
 
 const Page = styled.div`
   min-height: 70vh;

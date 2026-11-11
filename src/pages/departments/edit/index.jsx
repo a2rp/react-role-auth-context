@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { Styled } from "./styled";
 import useLocalCollection from "../../../hooks/useLocalCollection";
@@ -62,23 +62,28 @@ export default function DepartmentEdit() {
     const [errors, setErrors] = useState({});
     const [notFound, setNotFound] = useState(false);
     const [confirm, setConfirm] = useState({ open: false, mode: "delete" });
+    const loadedIdRef = useRef(null);
+    const markRecent = deps.markRecent;
+
+    const rec = useMemo(() => deps.items.find((x) => x.id === id) || null, [deps.items, id]);
 
     // load record
     useEffect(() => {
-        const rec = deps.get(id);
         if (!rec) {
             setNotFound(true);
             return;
         }
+        if (loadedIdRef.current === id) return;
+        loadedIdRef.current = id;
+        setNotFound(false);
+        markRecent(id);
         setDraft({
             name: rec.name || "",
             code: rec.code || "",
             manager: rec.manager || "",
             notes: rec.notes || "",
         });
-    }, [id]); // deps.get already marks recent
-
-    const rec = useMemo(() => deps.items.find((x) => x.id === id) || null, [deps.items, id]);
+    }, [id, rec, markRecent]);
 
     const canSave = useMemo(() => draft.name.trim().length > 0, [draft]);
 

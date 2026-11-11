@@ -2,7 +2,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import { Styled } from "./styled";
 import { MdClear } from "react-icons/md";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../../context/useAuth";
 
 const STORAGE_KEY = "navSearch";
 const COLLAPSE_KEY = "navCollapsed";

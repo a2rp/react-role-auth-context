@@ -1,19 +1,8 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import AuthContext, { defaultUser } from "./auth-context";
 
 const AUTH_KEY = "authUser";
 const VALID_ROLES = new Set(["root", "admin", "employee"]);
-
-const defaultUser = {
-    name: null,
-    role: null,
-    isLoggedIn: false,
-};
-
-const AuthContext = createContext({
-    user: defaultUser,
-    login: () => { },
-    logout: () => { },
-});
 
 function readSavedUser() {
     if (typeof window === "undefined") return defaultUser;
@@ -67,5 +56,3 @@ export const AuthProvider = ({ children }) => {
         </AuthContext.Provider>
     );
 };
-
-export const useAuth = () => useContext(AuthContext);

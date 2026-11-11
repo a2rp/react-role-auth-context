@@ -10,7 +10,7 @@ import Footer from "./components/footer";
 import NavList from "./components/navList";
 import AppRoutes from "./routes/AppRoutes";
 import Breadcrumbs from "./components/Breadcrumbs";
-import { useAuth } from "./context/AuthContext";
+import { useAuth } from "./context/useAuth";
 
 const THEME_KEY = "theme";
 const getInitialTheme = () => {
